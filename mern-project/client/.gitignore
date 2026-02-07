@@ -130,3 +130,6 @@ dist
 
 # DS STORE
 .DS_Store
+
+# Build output
+build/
