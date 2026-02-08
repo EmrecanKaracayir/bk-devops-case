@@ -1,4 +1,4 @@
-# >-----< BASE IMAGE >-----< #
+# >-----< BASE STAGE >-----< #
 
 FROM python:3.13-slim AS base
 
