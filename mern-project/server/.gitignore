@@ -130,3 +130,7 @@ dist
 
 # DS STORE
 .DS_Store
+
+# Env files
+.env
+*.env

@@ -1,0 +1,26 @@
+*
+
+# >-----< INCLUDES >-----< #
+
+# [+]: Install stage
+!package-lock.json
+!package.json
+
+# [+]: Build stage
+!public/
+!public/**
+!src/
+!src/**
+!package.json
+
+# [+]: Test stage
+
+# [+]: Run stage
+!server/
+!server/**
+
+# >-----< EXCLUDES >-----< #
+
+# [-]: MacOS files
+.DS_Store
+**/.DS_Store

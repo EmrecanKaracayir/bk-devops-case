@@ -1,0 +1,26 @@
+*
+
+# >-----< INCLUDES >-----< #
+
+# [+]: Install stage
+!package-lock.json
+!package.json
+
+# [+]: Build stage
+!db/
+!db/**
+!routes/
+!routes/**
+!loadEnvironment.mjs
+!server.mjs
+!package.json
+
+# [+]: Test stage
+
+# [+]: Run stage
+
+# >-----< EXCLUDES >-----< #
+
+# [-]: MacOS files
+.DS_Store
+**/.DS_Store
