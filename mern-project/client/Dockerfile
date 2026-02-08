@@ -39,8 +39,8 @@ RUN npm run test
 
 FROM nginx:alpine-slim AS runner
 
-HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost/health || exit 1
-
 COPY --from=builder /app/build/ /usr/share/nginx/html/
 COPY server/nginx.conf /etc/nginx/conf.d/default.conf
+
+HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
+    CMD wget --no-verbose --tries=1 --spider http://localhost/health || exit 1
