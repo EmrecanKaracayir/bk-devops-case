@@ -39,6 +39,8 @@ RUN npm run test
 
 FROM nginx:alpine-slim AS runner
 
+EXPOSE 80
+
 COPY --from=builder /app/build/ /usr/share/nginx/html/
 COPY server/nginx.conf /etc/nginx/conf.d/default.conf
 
