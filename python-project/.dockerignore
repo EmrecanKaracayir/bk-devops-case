@@ -1,0 +1,19 @@
+*
+
+# >-----< INCLUDES >-----< #
+
+# [+]: Install stage
+!requirements.txt
+
+# [+]: Build stage
+!ETL.py
+
+# [+]: Test stage
+
+# [+]: Run stage
+
+# >-----< EXCLUDES >-----< #
+
+# [-]: MacOS files
+.DS_Store
+**/.DS_Store
