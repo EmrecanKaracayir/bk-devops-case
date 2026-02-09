@@ -1,0 +1,59 @@
+aws:
+  accountId: __PLACEHOLDER__
+  region: __PLACEHOLDER__
+
+ingress:
+  enabled: true
+  host: ""
+
+mernServer:
+  image:
+    tag: "1.0.0"
+  port: 5050
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+  replicas: 1
+  hpa:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilization: 70
+  secret:
+    atlasUri: __PLACEHOLDER__
+
+mernClient:
+  image:
+    tag: "1.0.0"
+  port: 80
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 150m
+      memory: 128Mi
+  replicas: 1
+  hpa:
+    enabled: false
+    minReplicas: 1
+    maxReplicas: 3
+    targetCPUUtilization: 70
+
+pythonTask:
+  image:
+    tag: "1.0.0"
+  schedule: "0 * * * *"
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 200m
+      memory: 128Mi
+  restartPolicy: Never
+  backoffLimit: 3
