@@ -1,0 +1,29 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: python-task-cronjob
+spec:
+  schedule: {{ .Values.pythonTask.schedule | quote }}
+  concurrencyPolicy: Forbid
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    spec:
+      backoffLimit: {{ .Values.pythonTask.backoffLimit }}
+      template:
+        metadata:
+          labels:
+            app: python-task
+        spec:
+          containers:
+            - name: python-task-container
+              image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/python-task:{{ .Values.pythonTask.image.tag }}
+              imagePullPolicy: IfNotPresent
+              resources:
+                requests:
+                  cpu: {{ .Values.pythonTask.resources.requests.cpu }}
+                  memory: {{ .Values.pythonTask.resources.requests.memory }}
+                limits:
+                  cpu: {{ .Values.pythonTask.resources.limits.cpu }}
+                  memory: {{ .Values.pythonTask.resources.limits.memory }}
+          restartPolicy: {{ .Values.pythonTask.restartPolicy }}

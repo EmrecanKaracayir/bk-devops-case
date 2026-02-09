@@ -54,6 +54,6 @@ COPY --from=builder /app/loadEnvironment.mjs ./
 COPY --from=builder /app/server.mjs ./
 
 HEALTHCHECK --interval=30s --timeout=5s --retries=3 \
-    CMD wget --no-verbose --tries=1 --spider http://localhost:5050/healthcheck || exit 1
+    CMD wget --no-verbose --tries=1 --spider http://localhost:5050/health || exit 1
 
 CMD ["node", "server.mjs"]

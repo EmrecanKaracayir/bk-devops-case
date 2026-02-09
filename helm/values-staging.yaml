@@ -1,0 +1,26 @@
+ingress:
+  host: "staging.bk-devops-case.karacayir.com"
+
+mernServer:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 100m
+      memory: 128Mi
+    limits:
+      cpu: 250m
+      memory: 256Mi
+  hpa:
+    enabled: false
+
+mernClient:
+  replicas: 1
+  resources:
+    requests:
+      cpu: 50m
+      memory: 64Mi
+    limits:
+      cpu: 150m
+      memory: 128Mi
+  hpa:
+    enabled: false

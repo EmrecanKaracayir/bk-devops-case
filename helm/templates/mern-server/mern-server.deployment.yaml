@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mern-server-deployment
+spec:
+  {{- if not .Values.mernServer.hpa.enabled }}
+  replicas: {{ .Values.mernServer.replicas }}
+  {{- end }}
+  selector:
+    matchLabels:
+      app: mern-server
+  template:
+    metadata:
+      labels:
+        app: mern-server
+    spec:
+      containers:
+        - name: mern-server-container
+          image: {{ .Values.aws.accountId }}.dkr.ecr.{{ .Values.aws.region }}.amazonaws.com/mern-server:{{ .Values.mernServer.image.tag }}
+          imagePullPolicy: IfNotPresent
+          resources:
+            requests:
+              cpu: {{ .Values.mernServer.resources.requests.cpu }}
+              memory: {{ .Values.mernServer.resources.requests.memory }}
+            limits:
+              cpu: {{ .Values.mernServer.resources.limits.cpu }}
+              memory: {{ .Values.mernServer.resources.limits.memory }}
+          ports:
+            - containerPort: {{ .Values.mernServer.port }}
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.mernServer.port }}
+            initialDelaySeconds: 30
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: {{ .Values.mernServer.port }}
+            initialDelaySeconds: 5
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+          env:
+            - name: ATLAS_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mern-server-secret
+                  key: ATLAS_URI
